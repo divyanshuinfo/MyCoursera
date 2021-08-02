@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "/usr/bin/python3",
+    "commentTranslate.targetLanguage": "en",
+    "jupyter.jupyterServerType": "local",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    }
+}
