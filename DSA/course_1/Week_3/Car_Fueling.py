@@ -1,20 +1,28 @@
-max_distance = int(input())
-max_coverable_distance = int(input())
-N_of_stops = int(input())
-stops = list(map(int, input().split()))
-stops.append(max_distance)
-refils = 0
-try:
-    for i in range(N_of_stops):
-        pivot = 0
-        if stops[i+1] - stops[i] > max_coverable_distance:
-            print("-1")
-            quit()
-        if stops[i] - pivot > max_coverable_distance:
-            i -= 1
-            pivot = stops[i]
-            refils += 1
-except IndexError:
-    print("-1")
-    quit()
-print(refils)
+def compute_min_refills(travel_distance,
+                        max_distance_coverabele, no_of_stations, stops):
+    stops.insert(0, 0)
+    stops.append(travel_distance)
+    count = 0
+    while len(stops) > 1:
+        index = 1
+        while index < len(stops) and stops[index] - stops[0] <= max_distance_coverabele:
+            index += 1
+            # index now points to farthest reachable gas station
+        index -= 1
+        # cannot move further, so impossible to reach destination
+        if index == 0:
+            return -1
+        count += 1
+        stops = stops[index:]
+  # decrease count by 1 to exclude 'refill' that took place at destination
+    return count - 1
+
+if __name__ == '__main__':
+    while True:
+        travel_distance = int(input())
+        max_distance_coverabele = int(input())
+        no_of_stations = int(input())
+        stops = list(map(int, input().split()))
+        print(compute_min_refills(travel_distance,
+            max_distance_coverabele, no_of_stations, stops))
+
